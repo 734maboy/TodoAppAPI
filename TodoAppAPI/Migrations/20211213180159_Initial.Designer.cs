@@ -10,7 +10,7 @@ using TodoAppAPI;
 namespace TodoAppAPI.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20211213174426_Initial")]
+    [Migration("20211213180159_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,14 +27,31 @@ namespace TodoAppAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("596b6493-f8f7-4e00-addf-c421a517783c"),
+                            Name = "Учеба"
+                        },
+                        new
+                        {
+                            Id = new Guid("85fd64e0-7616-4f6b-a869-917f8d638dc6"),
+                            Name = "Дом"
+                        },
+                        new
+                        {
+                            Id = new Guid("e629799f-f45d-4c89-945e-9cc5ab117558"),
+                            Name = "Работа"
+                        });
                 });
 
             modelBuilder.Entity("TodoAppAPI.Models.Status", b =>
@@ -50,7 +67,24 @@ namespace TodoAppAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Status");
+                    b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("17d59567-dc95-48db-9912-4496e87e3fd6"),
+                            Name = "Заморожено"
+                        },
+                        new
+                        {
+                            Id = new Guid("9d4e20fe-70ae-4e12-a432-3247e2fcca4b"),
+                            Name = "Выполняется"
+                        },
+                        new
+                        {
+                            Id = new Guid("baa6278f-2a8b-4c06-ba02-5311116a79d1"),
+                            Name = "Выполнено"
+                        });
                 });
 
             modelBuilder.Entity("TodoAppAPI.Models.TodoItem", b =>
@@ -87,7 +121,7 @@ namespace TodoAppAPI.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TodoItem");
+                    b.ToTable("TodoItems");
                 });
 
             modelBuilder.Entity("TodoAppAPI.Models.User", b =>
@@ -113,7 +147,16 @@ namespace TodoAppAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b774092f-e0f2-43fc-b70d-f9fcff1a718b"),
+                            Login = "TeaIT",
+                            Name = "734su",
+                            Password = "letmeseeurcode"
+                        });
                 });
 
             modelBuilder.Entity("TodoAppAPI.Models.TodoItem", b =>
